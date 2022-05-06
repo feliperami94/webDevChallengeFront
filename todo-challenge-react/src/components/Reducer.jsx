@@ -16,6 +16,13 @@ const storeReducer = (store, action) => {
                 ...store, categories: action.payload
             }
             return allCategoriesFetched
+        case types.createCategory:
+            const newCategory = [...store.categories, action.payload]
+            const stateAddedCategory = {
+                ...store,
+                categories: newCategory
+            }
+            return stateAddedCategory
         default:
             return store;
     }

@@ -6,7 +6,7 @@ import { useState } from 'react'
 const MainForm = () => {
 
     const [store, dispatch] = useContext(StoreContext);
-    const {categories, tasks} = store;
+    const {categories} = store;
     const formRef = useRef('');
 
     const [categoryTitle, setCategoryTitle] = useState('');
@@ -15,19 +15,28 @@ const MainForm = () => {
         setCategoryTitle(event.target.value)
     }
 
-    const addCategory = (event) => {
+    const addCategory = async (event) => {
         event.preventDefault();
         if(categoryTitle){
             const newCategory = {
-                id: Math.floor(Math.random()*10000),
                 categoryName: categoryTitle,
                 taskList:[]
             }
-            setCategoryTitle('');
+            let categorySavedPromise = await fetch('http://localhost:8081/api/v1/category',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(newCategory)
+            })
+
+            let categorySaved = await categorySavedPromise.json();
             dispatch({
                 type: 'create-category',
-                payload: newCategory
+                payload: categorySaved
             })
+            setCategoryTitle('');
             formRef.current.reset();
         }
     }
