@@ -5,6 +5,7 @@ import TaskList from './TaskList';
 const CategoryForm = () => {
     const [store, dispatch] = useContext(StoreContext);
     const {categories} = store;
+    console.log(categories)
     const [taskTitle, setTaskTitle] = useState('');
     const inputRef = useRef('');
 
@@ -31,19 +32,25 @@ const CategoryForm = () => {
         setTaskTitle(event.target.value);
     }
 
-    const deleteCategory = (event, category) =>{
+    const deleteCategory = async (event, categoryId) =>{
         event.preventDefault();
-        dispatch({
-            type: 'delete-category',
-            payload: category
+        let response = await fetch(`http://localhost:8081/api/v1/delete/category/${categoryId}`,
+        {
+            method: 'DELETE'
         })
+        if (response.status === 200){
+          dispatch({
+            type: 'delete-category',
+            payload: categoryId
+          })
+        }
+        
     }
 
     const addTask = (event, idCategory) => {
         event.preventDefault();
         if(taskTitle){
             const newTask={
-                id: Math.floor(Math.random()*10000),
                 taskMessage: taskTitle,
                 taskStatus: false,
                 fkCategory: idCategory
@@ -64,7 +71,7 @@ const CategoryForm = () => {
             categories.map(category => {
                 return <div key={category.id} className={'category-container'}>
                     <h2>{category.categoryName}    </h2>
-                <button onClick={(e)=>deleteCategory(e, category)}>Delete Category</button>
+                <button onClick={(e)=>deleteCategory(e, category.id)}>Delete Category</button>
                 <br />
 
                 <input type="text" onChange={addTaskTitle} ref={inputRef}/>

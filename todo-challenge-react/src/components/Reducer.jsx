@@ -11,6 +11,12 @@ const types ={
 
 const storeReducer = (store, action) => {
     switch(action.type){
+        case types.deleteCategory:
+            const filteredStore = store.categories.filter(category => category.id !== action.payload)
+            const newStoreCategoryDeleted = {
+                ...store, categories: filteredStore
+            }
+            return newStoreCategoryDeleted
         case types.getCategories:
             const allCategoriesFetched = {
                 ...store, categories: action.payload
@@ -22,6 +28,7 @@ const storeReducer = (store, action) => {
                 ...store,
                 categories: newCategory
             }
+            // console.log(stateAddedCategory)
             return stateAddedCategory
         default:
             return store;
