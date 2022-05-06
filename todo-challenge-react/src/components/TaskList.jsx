@@ -4,7 +4,7 @@ import { StoreContext } from './StoreProvider';
 const TaskList = ({fkCategory}) => {
 
     const [store, dispatch] = useContext(StoreContext);
-    const {categories, tasks} = store;
+    const {categories} = store;
 
     const deleteTask = (event, task) => {
         event.preventDefault();
@@ -15,16 +15,16 @@ const TaskList = ({fkCategory}) => {
 
     }
 
+    const categoryContext = categories.find(category => category.id == fkCategory);
+
   return (
     <div>
         <ul>
             {
-                tasks.map(task =>{
-                    if (task.fkCategory === fkCategory ){
+                categoryContext.taskList.map(task =>{
                     return <li key={task.id}>{task.taskMessage}
-                    <button onClick={(e)=>deleteTask(e, task)}>Delete Task</button>
-                    </li>
-                    }
+                           <button onClick={(e)=>deleteTask(e, task)}>Delete Task</button>
+                           </li>
                 })
             }
         </ul>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import StoreProvider from './components/StoreProvider'
 import MainForm from './components/MainForm'
+import CategoryForm from './components/CategoryForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,10 +10,9 @@ function App() {
   return (
     <div className="App">
       <StoreProvider>
-        <MainForm>
+        <MainForm/>
+        <CategoryForm/>
 
-
-        </MainForm>
       </StoreProvider>
     </div>
     )

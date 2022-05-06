@@ -4,7 +4,7 @@ import TaskList from './TaskList';
 
 const CategoryForm = () => {
     const [store, dispatch] = useContext(StoreContext);
-    const {categories, tasks} = store;
+    const {categories} = store;
     const [taskTitle, setTaskTitle] = useState('');
     const inputRef = useRef('');
 

@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react'
 import { StoreContext } from './StoreProvider'
-import CategoryForm from './CategoryForm'
 import { useState } from 'react'
 
 const MainForm = () => {
@@ -38,7 +37,6 @@ const MainForm = () => {
         <input type="text" onChange={addingCategoryTitle} />
         <button onClick={(event) => {addCategory(event)} }>Create Category</button>
         <br />
-        <CategoryForm/>
         </form>
     </div>
   )

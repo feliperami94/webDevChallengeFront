@@ -7,19 +7,7 @@ const types ={
     updateTask: 'update-task',
 }
 
-const initialStore = {
-    categories : [
-        {id:2, categoryName: "Family"},
-        {id:4, categoryName: "Music"},
 
-    ],
-    tasks : [
-        {id:3, taskMessage: "Hangout with my parents",taskStatus: false, fkCategory: 2},
-        {id:5, taskMessage: "Watch a movie with my nephew",taskStatus: false, fkCategory: 2},
-        {id:7, taskMessage: "MF DOOM",taskStatus: false, fkCategory: 4},
-        {id:9, taskMessage: "A Tribe Called Quest",taskStatus: false, fkCategory: 4}
-    ]
-}
 
 const storeReducer = (store, action) => {
     switch(action.type){
@@ -47,5 +35,5 @@ const storeReducer = (store, action) => {
     }
 }
 
-export { initialStore, types }
+export { types }
 export default storeReducer
