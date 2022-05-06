@@ -1,9 +1,9 @@
 const types ={
     getCategories: 'get-categories',
-    createCategory: 'create-category',
-    deleteCategory:'delete-category',
+    createCategory: 'create-category',//
+    deleteCategory:'delete-category',//
     createTask: 'create-task',
-    deleteTask: 'delete-task',
+    deleteTask: 'delete-task',//
     updateTask: 'update-task',
 }
 
@@ -23,13 +23,16 @@ const initialStore = {
 
 const storeReducer = (store, action) => {
     switch(action.type){
+        case types.createTask:
+            const newTasks = [...store.tasks, action.payload];
+            const newStoreWithTask = {...store, tasks: newTasks}
+            return newStoreWithTask;
+
         case types.createCategory:
-            const newCategoryId = Math.floor(Math.random()*10000);
-            const newCategory = {
-                id: newCategoryId,
-                categoryName: action.payload
-            }
-            
+            const newCategories = [...store.categories, action.payload];
+            const newStore = {...store, categories: newCategories};
+            console.log(newStore)
+            return newStore;
         case types.deleteTask:
             const newTasksAfterDelete = store.tasks.filter(task => task.id !== action.payload.id)
             const newStoreAfterDelete = {...store, tasks: newTasksAfterDelete}

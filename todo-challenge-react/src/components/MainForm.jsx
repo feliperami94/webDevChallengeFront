@@ -17,10 +17,13 @@ const MainForm = () => {
     const addCategory = (event) => {
         event.preventDefault();
         if(categoryTitle){
+            const newCategory = {
+                id: Math.floor(Math.random()*10000),
+                categoryName: categoryTitle
+            }
             dispatch({
                 type: 'create-category',
-                payload: categoryTitle
-                
+                payload: newCategory
             })
         }
     }
