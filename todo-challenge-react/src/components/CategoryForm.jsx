@@ -5,7 +5,7 @@ import TaskList from './TaskList';
 const CategoryForm = () => {
     const [store, dispatch] = useContext(StoreContext);
     const {categories} = store;
-    console.log(categories)
+    // console.log(categories)
     const [taskTitle, setTaskTitle] = useState('');
     const inputRef = useRef('');
 
@@ -20,7 +20,7 @@ const CategoryForm = () => {
           }
         )
       }, [])
-
+    //   console.log(categories);
       const fetchAllCategories = async() =>{
         let response = await fetch('http://localhost:8081/api/v1')
         let data = await response.json()
@@ -47,7 +47,7 @@ const CategoryForm = () => {
         
     }
 
-    const addTask = (event, idCategory) => {
+    const addTask = async (event, idCategory) => {
         event.preventDefault();
         if(taskTitle){
             const newTask={
@@ -55,12 +55,23 @@ const CategoryForm = () => {
                 taskStatus: false,
                 fkCategory: idCategory
             }
-            inputRef.current.value = '';
-            setTaskTitle('');
+            let taskSavedPromise = await fetch('http://localhost:8081/api/v1/task',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(newTask)
+            })
+
+            let taskSaved = await taskSavedPromise.json();
+
             dispatch({
                 type: 'create-task',
-                payload: newTask
+                payload: taskSaved
             })
+            inputRef.current.value = '';
+            setTaskTitle('');
             
         }
     }

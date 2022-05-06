@@ -11,6 +11,22 @@ const types ={
 
 const storeReducer = (store, action) => {
     switch(action.type){
+        case types.deleteTask:
+            let storeCategoryContext = store.categories.find(category => category.id === action.payload.fkCategory);
+            let newTaskListAfterDelete = storeCategoryContext.taskList.filter(task => task.taskId !== action.payload.taskId);
+            storeCategoryContext.taskList = newTaskListAfterDelete;
+            let newStoreFiltered = store.categories.filter(category => category.id !== action.payload.fkCategory)
+            let newStoreArrayAfterTaskDelete = [...newStoreFiltered, storeCategoryContext]
+            let newStore = {...store, categories: newStoreArrayAfterTaskDelete}
+            return newStore
+        case types.createTask:
+            const taskCategoryContext = store.categories.filter(category => 
+                category.id !== action.payload.id
+            )
+            const newStoreArray = [...taskCategoryContext, action.payload]
+            const newStoreWithTask = {categories: newStoreArray}
+
+            return newStoreWithTask
         case types.deleteCategory:
             const filteredStore = store.categories.filter(category => category.id !== action.payload)
             const newStoreCategoryDeleted = {
@@ -28,7 +44,6 @@ const storeReducer = (store, action) => {
                 ...store,
                 categories: newCategory
             }
-            // console.log(stateAddedCategory)
             return stateAddedCategory
         default:
             return store;

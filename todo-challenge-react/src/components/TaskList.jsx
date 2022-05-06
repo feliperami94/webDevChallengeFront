@@ -6,12 +6,18 @@ const TaskList = ({fkCategory}) => {
     const [store, dispatch] = useContext(StoreContext);
     const {categories} = store;
 
-    const deleteTask = (event, task) => {
+    const deleteTask = async (event, taskToBeDeleted) => {
         event.preventDefault();
-        dispatch({
-            type: 'delete-task',
-            payload: task
+        let response = await fetch(`http://localhost:8081/api/v1/delete/task/${taskToBeDeleted.taskId}`,
+        {
+            method: 'DELETE'
         })
+        if (response.status === 200){
+          dispatch({
+            type: 'delete-task',
+            payload: taskToBeDeleted
+          })
+        }
 
     }
 
@@ -19,15 +25,18 @@ const TaskList = ({fkCategory}) => {
 
   return (
     <div>
-        <ul>
             {
                 categoryContext.taskList.map(task =>{
-                    return <li key={task.taskId} className="task-message" >{task.taskMessage}
-                            </li>
+                    return <div className='tasksList' key={task.taskId}>
+                            <h3  className="task-message" >{task.taskMessage}</h3>
+                            <input type="checkbox" />
+                            <button onClick={(e)=>{
+                                deleteTask(e, task)
+                                }}>Delete Task</button>
+                            <br />
+                            </div>
                 })
             }
-            <button onClick={(e)=>deleteTask(e, task.id)}>Delete Task</button>
-        </ul>
     </div>
   )
 }

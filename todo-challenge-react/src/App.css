@@ -84,3 +84,7 @@ li{
 .task-message{
   display: inline-block;
 }
+
+.tasksList{
+  display: inline;
+}
