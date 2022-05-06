@@ -2,6 +2,7 @@ body {
   display: flex;
   align-items: center; 
   justify-content: center;
+  background-color: #92990F;
 }
 .App {
   text-align: center;
@@ -51,10 +52,31 @@ ul {
   list-style-type: none;
 }
 
-.category-container{
-  border: 4px solid #282c34;;
-  border-radius: 5%;
+.general-container{
+  border: 4px solid #DEE62D;
+  background-color: #DEE62D;
   display: flex;
   align-items: center; 
   justify-content:space-evenly;
+  flex-direction: column;
+}
+
+.category-container{
+  display: inline-block;
+  margin: 10px;
+  width: 70vh;
+  border: 4px solid #459CE6;
+  background-color: #459CE6;
+}
+h2{
+  display: inline-block;
+}
+input{
+  margin: 10px;
+}
+button{
+  margin: 10px;
+}
+li{
+  font-size: 15px;
 }

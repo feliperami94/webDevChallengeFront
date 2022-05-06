@@ -29,8 +29,8 @@ const CategoryForm = () => {
                 taskStatus: false,
                 fkCategory: idCategory
             }
-            setTaskTitle('');
             inputRef.current.value = '';
+            setTaskTitle('');
             dispatch({
                 type: 'create-task',
                 payload: newTask
@@ -40,11 +40,11 @@ const CategoryForm = () => {
     }
 
   return (
-    <div className='category-container'>
-        <ul>
+    <div className='general-container'>
         {
             categories.map(category => {
-                return <li key={category.id}>{category.categoryName}
+                return <div key={category.id} className={'category-container'}>
+                    <h2>{category.categoryName}    </h2>
                 <button onClick={(e)=>deleteCategory(e, category)}>Delete Category</button>
                 <br />
 
@@ -52,10 +52,9 @@ const CategoryForm = () => {
                 <button onClick={(event)=>{addTask(event, category.id)}}>Create Task</button>
                 <TaskList fkCategory={category.id} />
                 <br/>
-                </li>
+                </div>
             })
         }
-        </ul>
     </div>
   )
 }
