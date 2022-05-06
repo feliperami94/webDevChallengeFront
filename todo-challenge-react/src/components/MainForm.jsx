@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { StoreContext } from './StoreProvider'
 import CategoryForm from './CategoryForm'
 import { useState } from 'react'
@@ -7,6 +7,7 @@ const MainForm = () => {
 
     const [store, dispatch] = useContext(StoreContext);
     const {categories, tasks} = store;
+    const formRef = useRef('');
 
     const [categoryTitle, setCategoryTitle] = useState('');
 
@@ -21,17 +22,19 @@ const MainForm = () => {
                 id: Math.floor(Math.random()*10000),
                 categoryName: categoryTitle
             }
+            setCategoryTitle('');
             dispatch({
                 type: 'create-category',
                 payload: newCategory
             })
+            formRef.current.reset();
         }
     }
 
   return (
     <div>
         <h1>Dashboard</h1>
-        <form action="">
+        <form action="" ref={formRef}>
         <input type="text" onChange={addingCategoryTitle} />
         <button onClick={(event) => {addCategory(event)} }>Create Category</button>
         <br />
