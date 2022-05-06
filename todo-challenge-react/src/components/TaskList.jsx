@@ -28,8 +28,8 @@ const TaskList = ({fkCategory}) => {
             {
                 categoryContext.taskList.map(task =>{
                     return <div className='tasksList' key={task.taskId}>
-                            <h3  className="task-message" >{task.taskMessage}</h3>
-                            <input type="checkbox" />
+                            <p className="task-message" style={task.done? {textDecoration: 'line-through'}:{}}>{task.taskMessage}</p>
+                            <input type="checkbox" checked={task.done}/>
                             <button onClick={(e)=>{
                                 deleteTask(e, task)
                                 }}>Delete Task</button>
