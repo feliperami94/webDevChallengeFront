@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from 'react'
+import React, {useContext, useState, useRef, useEffect} from 'react'
 import { StoreContext } from './StoreProvider'
 import TaskList from './TaskList';
 
@@ -7,6 +7,25 @@ const CategoryForm = () => {
     const {categories} = store;
     const [taskTitle, setTaskTitle] = useState('');
     const inputRef = useRef('');
+
+    useEffect(()=>{
+        let fetchCategories = fetchAllCategories().then(
+          categoriesFetched => {
+            let action ={
+              type: 'get-categories',
+              payload: categoriesFetched
+            }
+            dispatch(action);
+          }
+        )
+      }, [])
+
+      const fetchAllCategories = async() =>{
+        let response = await fetch('http://localhost:8081/api/v1')
+        let data = await response.json()
+        return data
+      }
+  
 
     const addTaskTitle = (event) =>{
         setTaskTitle(event.target.value);

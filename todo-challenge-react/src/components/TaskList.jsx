@@ -22,11 +22,13 @@ const TaskList = ({fkCategory}) => {
         <ul>
             {
                 categoryContext.taskList.map(task =>{
-                    return <li key={task.id}>{task.taskMessage}
-                           <button onClick={(e)=>deleteTask(e, task)}>Delete Task</button>
-                           </li>
+                    console.log(task.taskId)
+                    return <li key={task.taskId} className="task-message" >{task.taskMessage}
+                {/* //     //     {console.log(`${task.id} es el id del task`)} */}
+                            </li>
                 })
             }
+            <button onClick={(e)=>deleteTask(e, task)}>Delete Task</button>
         </ul>
     </div>
   )
