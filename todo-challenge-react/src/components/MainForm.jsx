@@ -1,6 +1,7 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import { StoreContext } from './StoreProvider'
 import { useState } from 'react'
+
 
 const MainForm = () => {
 
@@ -19,7 +20,8 @@ const MainForm = () => {
         if(categoryTitle){
             const newCategory = {
                 id: Math.floor(Math.random()*10000),
-                categoryName: categoryTitle
+                categoryName: categoryTitle,
+                taskList:[]
             }
             setCategoryTitle('');
             dispatch({
