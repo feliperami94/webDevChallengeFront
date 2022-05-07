@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import { StoreContext } from './StoreProvider';
 
-const TaskList = ({fkCategory, setEditTaskTitle}) => {
+const TaskList = ({fkCategory, setEditingState, setTaskTitle, setTask}) => {
 
     const [store, dispatch] = useContext(StoreContext);
     const {categories} = store;
@@ -42,8 +42,10 @@ const TaskList = ({fkCategory, setEditTaskTitle}) => {
     }
 
     const editTaskName = (e, task) => {
-        console.log(task)
-        setEditTaskTitle(task.taskMessage)
+        e.preventDefault();
+        setEditingState(true);
+        setTaskTitle(task.taskMessage);
+        setTask(task);
     }
 
     const categoryContext = categories.find(category => category.id == fkCategory);

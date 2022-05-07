@@ -1,8 +1,8 @@
 const types ={
-    getCategories: 'get-categories',
+    getCategories: 'get-categories',//
     createCategory: 'create-category',//
     deleteCategory:'delete-category',//
-    createTask: 'create-task',
+    createTask: 'create-task',//
     deleteTask: 'delete-task',//
     updateTask: 'update-task',
 }
