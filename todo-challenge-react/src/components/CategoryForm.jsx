@@ -8,6 +8,8 @@ const CategoryForm = () => {
     // console.log(categories)
     const [taskTitle, setTaskTitle] = useState('');
     const inputRef = useRef('');
+    const [editTaskTitle, setEditTaskTitle] = useState('');
+
 
     useEffect(()=>{
         let fetchCategories = fetchAllCategories().then(
@@ -85,9 +87,9 @@ const CategoryForm = () => {
                 <button onClick={(e)=>deleteCategory(e, category.id)}>Delete Category</button>
                 <br />
 
-                <input type="text" onChange={addTaskTitle} ref={inputRef}/>
+                <input type="text" onChange={addTaskTitle} ref={inputRef} value={editTaskTitle}/>
                 <button onClick={(event)=>{addTask(event, category.id)}}>Create Task</button>
-                <TaskList fkCategory={category.id} />
+                <TaskList fkCategory={category.id} setEditTaskTitle={setEditTaskTitle}/>
                 <br/>
                 </div>
             })

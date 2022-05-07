@@ -11,6 +11,12 @@ const types ={
 
 const storeReducer = (store, action) => {
     switch(action.type){
+        case types.updateTask:
+            let newStoreFilterefBeforeUpdate = store.categories.filter(category => category.id !== action.payload.id)
+            let newStoreArrayAfterUpdate = [...newStoreFilterefBeforeUpdate, action.payload]
+            let newUpdatedStore = {...store, categories: newStoreArrayAfterUpdate}
+            return newUpdatedStore
+
         case types.deleteTask:
             let storeCategoryContext = store.categories.find(category => category.id === action.payload.fkCategory);
             let newTaskListAfterDelete = storeCategoryContext.taskList.filter(task => task.taskId !== action.payload.taskId);
