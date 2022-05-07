@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import StoreProvider from './components/StoreProvider'
+import StoreProvider from './store/StoreProvider'
 import MainForm from './components/MainForm'
 import CategoryForm from './components/CategoryForm'
 

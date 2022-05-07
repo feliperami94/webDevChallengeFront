@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { StoreContext } from './StoreProvider';
+import { StoreContext } from '../store/StoreProvider';
 
 const TaskList = ({fkCategory, setEditingState, setTaskTitle, setTask}) => {
 

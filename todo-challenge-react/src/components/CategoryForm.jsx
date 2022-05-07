@@ -1,5 +1,5 @@
 import React, {useContext, useState, useRef, useEffect} from 'react'
-import { StoreContext } from './StoreProvider'
+import { StoreContext } from '../store/StoreProvider'
 import TaskList from './TaskList';
 
 const CategoryForm = () => {
@@ -107,32 +107,35 @@ const CategoryForm = () => {
         })
         setTaskTitle('');
         inputRef.current.value = '';
-        setEditingState(false);
+        setEditingState(false)
         }
         
     }
 
   return (
     <div className='general-container'>
-        <form >
         {
             categories.map(category => {
-                return <div key={category.id} className={'category-container'}>
+                return( 
+                // <div key={category.id} className={'category-container'}>
+                    <form key={category.id} className={'category-container'}>
                     <h2>{category.categoryName}    </h2>
                 <button onClick={(e)=>deleteCategory(e, category.id)}>Delete Category</button>
                 <br />
 
                 <input type="text" onChange={addTaskTitle} ref={inputRef} value={taskTitle}/>
+                {/* <button onClick={(event)=>{addTask(event, category.id)}}>Create Task</button> */}
 
                 <input type="submit" onClick={editingState? (event)=>{updateTask(event, category.id)}:(event)=>{addTask(event, category.id)}} value={editingState?"Update task":"Create task"}></input>
 
                 <TaskList fkCategory={category.id} setEditingState={setEditingState} setTaskTitle={setTaskTitle} setTask={setTask}/>
                 <br/>
-                </div>
+                </form>
+                )
+                // </div>
             })
         }
 
-        </form>
     </div>
   )
 }

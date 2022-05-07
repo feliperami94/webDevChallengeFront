@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import { StoreContext } from './StoreProvider'
+import { StoreContext } from '../store/StoreProvider'
 import { useState } from 'react'
 
 
